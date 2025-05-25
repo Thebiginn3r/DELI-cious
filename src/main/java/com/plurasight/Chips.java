@@ -1,17 +1,25 @@
 package com.plurasight;
 
-public class Chips {
-    private String flavor;
+import java.util.List;
 
-    public Chips(String flavor) {
-        this.flavor = flavor;
+public class Chips {
+    private List flavor;
+
+    public Chips(List flavor) {
+        flavor = flavor;
     }
 
-    public String getFlavor() {
+    public List getFlavor() {
+        flavor.add("BBQ");
+        flavor.add("Ranch");
+        flavor.add("Classic");
+        flavor.add("Salt & Vinegar");
+        flavor.add("Sour Cream & Onion");
         return flavor;
     }
 
-    public void getPrice(){
-
+    public double getPrice(){
+        double getPrice = 1.50;
+        return getPrice();
     }
 }

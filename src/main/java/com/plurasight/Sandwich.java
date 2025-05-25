@@ -31,7 +31,7 @@ public class Sandwich {
         return isExtraCheese;
     }
 
-    public boolean isExtraMeat() {
+    public boolean isExtraMeat(){
         return isExtraMeat;
     }
 

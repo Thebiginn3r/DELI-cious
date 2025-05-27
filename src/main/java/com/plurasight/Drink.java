@@ -1,17 +1,18 @@
 package com.plurasight;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Drink {
-    private List size;
-    private List flavor;
+    private ArrayList<String> size;
+    private ArrayList<String> flavor;
 
-    public Drink(List size, List flavor) {
+    public Drink() {
         size = size;
         flavor = flavor;
     }
 
-    public List getSize() {
+    public ArrayList getSize() {
         size.add("Small");
         size.add("Medium");
         size.add("Large");
@@ -19,6 +20,7 @@ public class Drink {
     }
 
     public List getFlavor() {
+
         flavor.add("Sprite");
         flavor.add("Coke");
         flavor.add("Orange");

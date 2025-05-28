@@ -47,9 +47,35 @@ public class Order {
 
     public void getOrderDetails(){
 
+        System.out.println("Order placed on: " + LocalDateTime.now());
+        System.out.println();
+
+        double total = 0.00;
+        System.out.println("Sandwiches: ");
+        int i = 1;
+        for (Sandwich s : sandwiches){
+            double price = s.calculatePrice();
+            System.out.printf(" Sandwich %d - $%.2f", i++, price);
+            total += price;
+        }
+
+        System.out.println("Drinks:");
+        for (Drink d : drinks){
+            System.out.println(" " + d);
+            total += d.getPrice();
+        }
+
+        System.out.println("Chips:");
+        for (Chips c : chips){
+            System.out.println(" " + c);
+            total += c.getPrice();
+        }
+        System.out.printf("Total Price: $%.2f", total);
     }
 
     public void getTotalPrice(){
 
     }
+
+
 }

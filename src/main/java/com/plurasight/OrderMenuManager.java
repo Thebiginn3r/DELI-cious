@@ -122,21 +122,26 @@ public class OrderMenuManager {
         // put in a helper method to convert from 123 to 4812
         sandwich.setSize(sizeChoice);
         scanner.nextLine();
-        System.out.print("White, Wheat, Rye, Wrap\n What type of bread would you like?: ");
+        System.out.print("White, Wheat, Rye, Wrap\nWhat type of bread would you like?: ");
         String breadType = scanner.nextLine();
         sandwich.setBreadType(breadType);
         System.out.println("What meat would you like on your sandwich?\n Steak, Ham, Salami, Roast Beef, Chicken, Bacon");
         // prints out the meat options
         String meatOption = scanner.nextLine();
         sandwich.setMeat(meatOption);
+
         System.out.println("Would you like extra meat?(yes/no)");
-        boolean extraMChoice = scanner.nextBoolean();
+        String inputM = scanner.nextLine().trim().toLowerCase();
+        boolean extraMChoice = inputM.equals("yes");
         sandwich.setExtraMeat(extraMChoice);
+
         System.out.println("What cheese would you like?\n American, Provolone, Cheddar, Swiss");
         String cheeseOption = scanner.nextLine();
         sandwich.setCheese(cheeseOption);
+
         System.out.println("Would you like extra cheese?(yes/no)");
-        boolean extraCChoice = scanner.nextBoolean();
+        String inputC = scanner.nextLine().trim().toLowerCase();
+        boolean extraCChoice = inputC.equals("yes");
         sandwich.setExtraCheese(extraCChoice);
 
         List<Toppings> toppings = new ArrayList<>();

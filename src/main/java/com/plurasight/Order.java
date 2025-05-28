@@ -17,15 +17,15 @@ public class Order {
         dateTime = LocalDateTime.now();
     }
 
-    public List getSandwich() {
-        return sandwich;
+    public List<Sandwich> getSandwiches(){
+        return sandwiches;
     }
 
-    public List getDrink() {
-        return drink;
+    public List<Drink> getDrinks(){
+        return drinks;
     }
 
-    public List getChips() {
+    public List<Chips> getChips(){
         return chips;
     }
 

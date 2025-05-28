@@ -3,27 +3,45 @@ package com.plurasight;
 import java.util.List;
 
 public class Sandwich {
-    private boolean toasted;
+    private String toasted;
     private int size;
     private String breadType;
     private String meat;
     private String cheese;
-    private boolean isExtraCheese;
-    private boolean isExtraMeat;
+    private boolean extraCheese;
+    private boolean extraMeat;
+    private String side;
     private List<Toppings> toppings;
 
     public Sandwich() {
         this.toasted = toasted;
         this.size = size;
         this.breadType = breadType;
-        this.isExtraCheese = isExtraCheese;
-        this.isExtraMeat = isExtraMeat;
+        this.extraCheese = extraCheese;
+        this.extraMeat = extraMeat;
         this.toppings = toppings;
         this.meat = meat;
         this.cheese = cheese;
+        this.side = side;
     }
 
-    public void setToasted(boolean toasted) {
+    public String getSide() {
+        return side;
+    }
+
+    public void setSide(String side) {
+        this.side = side;
+    }
+
+    public boolean getExtraMeat() {
+        return extraMeat;
+    }
+
+    public boolean getExtraCheese() {
+        return extraCheese;
+    }
+
+    public void setToasted(String toasted) {
         this.toasted = toasted;
     }
 
@@ -52,18 +70,18 @@ public class Sandwich {
     }
 
     public void setExtraCheese(boolean extraCheese) {
-        isExtraCheese = extraCheese;
+        this.extraCheese = extraCheese;
     }
 
     public void setExtraMeat(boolean extraMeat) {
-        isExtraMeat = extraMeat;
+        this.extraMeat = extraMeat;
     }
 
     public void setToppings(List<Toppings> toppings) {
         this.toppings = toppings;
     }
 
-    public boolean isToasted() {
+    public String toasted() {
         return toasted;
     }
 
@@ -75,13 +93,7 @@ public class Sandwich {
         return breadType;
     }
 
-    public boolean isExtraCheese() {
-        return isExtraCheese;
-    }
 
-    public boolean isExtraMeat(){
-        return isExtraMeat;
-    }
 
     public void getPrice(){
 
@@ -89,5 +101,34 @@ public class Sandwich {
 
     public void getToppings(){
 
+    }
+
+    public double calculatePrice(){
+        double baseSandwich = switch (size){
+            case 4 -> 5.50;
+            case 8 -> 7.00;
+            case 12 -> 8.50;
+            default -> 0.0;
+        };
+
+        double extras = 0.0;
+        if (extraMeat) extras += switch (size) {
+            case 4 -> .50;
+            case 8 -> 1.00;
+            case 12 -> 1.50;
+            default -> 0.0;
+        };
+        if (extraCheese) extras += switch (size) {
+            case 4 -> .30;
+            case 8 -> .60;
+            case 12 -> .90;
+            default -> 0.00;
+        };
+
+        for (Toppings t : toppings) {
+            extras += t.getPrice(size);
+        }
+
+        return baseSandwich + extras;
     }
 }

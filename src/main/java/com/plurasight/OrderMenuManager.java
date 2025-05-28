@@ -119,6 +119,7 @@ public class OrderMenuManager {
         System.out.println("2) 8 inch");
         System.out.println("3) 12 inch");
         int sizeChoice = scanner.nextInt();
+        // put in a helper method to convert from 123 to 4812
         sandwich.setSize(sizeChoice);
         scanner.nextLine();
         System.out.print("White, Wheat, Rye, Wrap\n What type of bread would you like?: ");
@@ -155,11 +156,15 @@ public class OrderMenuManager {
             String sauceChoices = scanner.nextLine();
             toppings.add(new Sauces(sauceChoices));
         }
+        sandwich.setToppings(toppings);
+
         System.out.println("Sides: Au Jus, Sauce");//print sides
         System.out.println("Would you like a side?(yes/no)");
         String sideChoice = scanner.nextLine();
+        sandwich.setSide(sideChoice);
         System.out.println("Would you like the sandwich toasted?(yes/no)");
-        boolean toastedChoice = scanner.hasNextLine();
+        String toastedChoice = scanner.nextLine();
+        sandwich.setToasted(toastedChoice);
 
 
     }

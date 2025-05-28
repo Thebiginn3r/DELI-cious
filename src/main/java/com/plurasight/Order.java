@@ -33,6 +33,18 @@ public class Order {
         return dateTime;
     }
 
+    public void addSandwich(Sandwich sandwich){
+        sandwiches.add(sandwich);
+    }
+
+    public void addDrink(Drink drink){
+        drinks.add(drink);
+    }
+
+    public void addChip(Chips chip){
+        chips.add(chip);
+    }
+
     public void getOrderDetails(){
 
     }

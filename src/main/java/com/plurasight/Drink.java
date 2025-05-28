@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Drink {
-    private String size;
+    private int size;
     private String flavor;
 
-    public Drink(String size, String flavor) {
+    public Drink(int size, String flavor) {
         this.size = size;
         this.flavor = flavor;
     }
 
-    public String getSize() {
+    public int getSize() {
         return size;
     }
 
@@ -21,12 +21,12 @@ public class Drink {
     }
 
     public double getPrice(){
-        switch (size.toLowerCase()){
-            case "small":
+        switch (size){
+            case 1:
                 return 2.00;
-            case "medium":
+            case 2:
                 return 2.50;
-            case "large":
+            case 3:
                 return 3.00;
             default:
                 return 0.00;

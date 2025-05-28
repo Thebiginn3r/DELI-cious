@@ -1,5 +1,6 @@
 package com.plurasight;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -111,45 +112,56 @@ public class OrderMenuManager {
     }
 
     public void plusSandwich(){
-        System.out.print("What type of bread would you like?\n White, Wheat, Rye, Wrap");
-        System.out.println();//prints out the bread type arraylist
-        String breadType = scanner.nextLine();
-        //System.out.println("What size sandwich would you like?");
+        Sandwich sandwich = new Sandwich();
+        //add for loop for number of sandwiches later
         System.out.print("What size sandwich would you like? (1) 4 inch, (2) 8 inch, (3) 12 inch: ");
         System.out.println("1) 4 inch");
         System.out.println("2) 8 inch");
         System.out.println("3) 12 inch");
         int sizeChoice = scanner.nextInt();
+        sandwich.setSize(sizeChoice);
         scanner.nextLine();
+        System.out.print("White, Wheat, Rye, Wrap\n What type of bread would you like?: ");
+        String breadType = scanner.nextLine();
+        sandwich.setBreadType(breadType);
         System.out.println("What meat would you like on your sandwich?\n Steak, Ham, Salami, Roast Beef, Chicken, Bacon");
-        System.out.println();// prints out the meat options
+        // prints out the meat options
         String meatOption = scanner.nextLine();
+        sandwich.setMeat(meatOption);
         System.out.println("Would you like extra meat?(yes/no)");
-        String extraMChoice = scanner.nextLine();
+        boolean extraMChoice = scanner.nextBoolean();
+        sandwich.setExtraMeat(extraMChoice);
         System.out.println("What cheese would you like?\n American, Provolone, Cheddar, Swiss");
-        System.out.println();//prints out the cheese options
         String cheeseOption = scanner.nextLine();
+        sandwich.setCheese(cheeseOption);
         System.out.println("Would you like extra cheese?(yes/no)");
-        String extraCChoice = scanner.nextLine();
-        System.out.println();// show topping options
+        boolean extraCChoice = scanner.nextBoolean();
+        sandwich.setExtraCheese(extraCChoice);
+
+        List<Toppings> toppings = new ArrayList<>();
         System.out.println("How many topping would you like?\n Lettuce, Peppers, Onions, Tomatoes, Jalapenos, Cucumbers, Pickles, Guacamole, Mushrooms");
         int toppingNumber = scanner.nextInt();
+        scanner.nextLine();
         for (int i = 0; i < toppingNumber; i++) {
             System.out.print("Pick your topping: ");
             String toppingChoices = scanner.nextLine();
+            toppings.add(new RegularTopping(toppingChoices));
         }
         System.out.println("How many sauces would you like?\n Mayo, Mustard, Ketchup, Ranch, Thousand Island, Vinaigrette");
         int sauceNumber = scanner.nextInt();
-        for (int i = 0; i <  toppingNumber; i++) {
+        scanner.nextLine();
+        for (int i = 0; i <  sauceNumber; i++) {
             System.out.print("Pick your sauce: ");
             String sauceChoices = scanner.nextLine();
+            toppings.add(new Sauces(sauceChoices));
         }
         System.out.println("Sides: Au Jus, Sauce");//print sides
         System.out.println("Would you like a side?(yes/no)");
         String sideChoice = scanner.nextLine();
         System.out.println("Would you like the sandwich toasted?(yes/no)");
         boolean toastedChoice = scanner.hasNextLine();
-        Sandwich sandwich = new Sandwich();
+
+
     }
 
     public void plusDrink(){
@@ -157,7 +169,7 @@ public class OrderMenuManager {
         int drinkSize = scanner.nextInt();
         System.out.println("What flavor would you like? ");
         String drinkFlavor = scanner.nextLine();
-
+        Drink drink = new Drink(drinkSize, drinkFlavor);
     }
 
     public void plusChips(){
@@ -167,8 +179,9 @@ public class OrderMenuManager {
     }
 
     public void checkout(){
+        Order order = new Order();
         System.out.println("Does your order look correct?(yes/no)");
-        System.out.println();// print out order details
+        System.out.println(order);// print out order details
         String orderCheck = scanner.nextLine();
         if (orderCheck.equalsIgnoreCase("yes")){
             //write to receipt file

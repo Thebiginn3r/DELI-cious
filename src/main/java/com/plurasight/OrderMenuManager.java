@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class OrderMenuManager {
     Scanner scanner = new Scanner(System.in);
-    private Order order;
-    Drink drink = new Drink();
-    List flavor = drink.getFlavor();
+    private Order currentOrder;
+    //List flavor = drink.getFlavor();
+
 
 
     public void display(){
@@ -66,11 +66,12 @@ public class OrderMenuManager {
         System.out.println("               ----------------------------------------");
         System.out.printf("%-15s %-12s%n", "All Chips", "$1.50");
 
-        System.out.println();
+        //System.out.println(flavor);
 
     }
 
     public void startOrder() {
+        currentOrder = new Order();
         boolean running = true;
         while (running) {
             System.out.println("1 - Add sandwich");
@@ -110,7 +111,7 @@ public class OrderMenuManager {
     }
 
     public void plusSandwich(){
-        System.out.print("What type of bread would you like?");
+        System.out.print("What type of bread would you like?\n White, Wheat, Rye, Wrap");
         System.out.println();//prints out the bread type arraylist
         String breadType = scanner.nextLine();
         //System.out.println("What size sandwich would you like?");
@@ -120,34 +121,35 @@ public class OrderMenuManager {
         System.out.println("3) 12 inch");
         int sizeChoice = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("What meat would you like on your sandwich?");
+        System.out.println("What meat would you like on your sandwich?\n Steak, Ham, Salami, Roast Beef, Chicken, Bacon");
         System.out.println();// prints out the meat options
         String meatOption = scanner.nextLine();
         System.out.println("Would you like extra meat?(yes/no)");
         String extraMChoice = scanner.nextLine();
-        System.out.println("What cheese would you like?");
+        System.out.println("What cheese would you like?\n American, Provolone, Cheddar, Swiss");
         System.out.println();//prints out the cheese options
         String cheeseOption = scanner.nextLine();
         System.out.println("Would you like extra cheese?(yes/no)");
         String extraCChoice = scanner.nextLine();
         System.out.println();// show topping options
-        System.out.println("How many topping would you like?");
+        System.out.println("How many topping would you like?\n Lettuce, Peppers, Onions, Tomatoes, Jalapenos, Cucumbers, Pickles, Guacamole, Mushrooms");
         int toppingNumber = scanner.nextInt();
         for (int i = 0; i < toppingNumber; i++) {
             System.out.print("Pick your topping: ");
             String toppingChoices = scanner.nextLine();
         }
-        System.out.println("How many sauces would you like?");
+        System.out.println("How many sauces would you like?\n Mayo, Mustard, Ketchup, Ranch, Thousand Island, Vinaigrette");
         int sauceNumber = scanner.nextInt();
-        for (int i = 0; i < toppingNumber; i++) {
+        for (int i = 0; i <  toppingNumber; i++) {
             System.out.print("Pick your sauce: ");
             String sauceChoices = scanner.nextLine();
         }
-        System.out.println();//print sides
+        System.out.println("Sides: Au Jus, Sauce");//print sides
         System.out.println("Would you like a side?(yes/no)");
         String sideChoice = scanner.nextLine();
         System.out.println("Would you like the sandwich toasted?(yes/no)");
         boolean toastedChoice = scanner.hasNextLine();
+        Sandwich sandwich = new Sandwich();
     }
 
     public void plusDrink(){

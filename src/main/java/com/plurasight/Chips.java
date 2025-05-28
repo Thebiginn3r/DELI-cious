@@ -19,7 +19,6 @@ public class Chips {
     }
 
     public double getPrice(){
-        double getPrice = 1.50;
-        return getPrice();
+        return 1.50;
     }
 }

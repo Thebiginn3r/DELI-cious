@@ -1,13 +1,16 @@
 package com.plurasight;
 
+import java.util.List;
+
 public class Sandwich {
     private boolean toasted;
     private int size;
     private String breadType;
     private boolean isExtraCheese;
     private boolean isExtraMeat;
+    private List<Toppings> toppings;
 
-    public Sandwich(int size, boolean toasted, String breadType, boolean isExtraCheese, boolean isExtraMeat) {
+    public Sandwich() {
         this.size = size;
         this.toasted = toasted;
         this.breadType = breadType;

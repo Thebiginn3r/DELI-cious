@@ -4,15 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Drink {
-    private ArrayList<String> size;
-    private ArrayList<String> flavor;
+    private String size;
+    private String flavor;
 
-    public Drink() {
-        size = size;
-        flavor = flavor;
+    public Drink(String size, String flavor) {
+        this.size = size;
+        this.flavor = flavor;
     }
 
-    public ArrayList getSize() {
+    public String getSize() {
+        return size;
+    }
+
+    public String getFlavor() {
+        return flavor;
+    }
+
+    public double getPrice(){
+        switch (size.toLowerCase()){
+            case "small":
+                return 2.00;
+            case "medium":
+                return 2.50;
+            case "large":
+                return 3.00;
+            default:
+                return 0.00;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return size + " " + flavor + " - $" + getPrice();
+    }
+
+    /* public ArrayList getSize() {
         size.add("Small");
         size.add("Medium");
         size.add("Large");
@@ -39,7 +65,7 @@ public class Drink {
             price = 3.00;
         }
         return price;
-    }
+    }*/
 
 
 }

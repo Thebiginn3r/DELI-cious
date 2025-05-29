@@ -1,0 +1,11 @@
+Order placed on: 2025-05-29|02:25:46
+Sandwiches:
+Drinks:
+ Small Sprite - $2.00
+ Large milk - $3.00
+Chips:
+ Chips bbq - $1.50
+ Chips ranch - $1.50
+Total Price: $8.00
+--------------------------------------------------
+

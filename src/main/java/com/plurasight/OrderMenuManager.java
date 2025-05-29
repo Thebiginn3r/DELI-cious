@@ -235,11 +235,15 @@ public class OrderMenuManager {
         } else {
             System.out.println("Invalid choice. Returning to menu");
         }
+
+        ReceiptWriter rw = new ReceiptWriter(currentOrder);
+        rw.saveOrder();
     }
 
     public void cancelOrder(){
 
     }
+
 
     public void editOrder(){
         System.out.println("What would you like to change?");

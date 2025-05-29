@@ -121,24 +121,47 @@ public class OrderMenuManager {
 
     public Sandwich plusSandwich(){
         Sandwich sandwich = new Sandwich();
-        //add for loop for number of sandwiches later
         System.out.println("What size sandwich would you like? (1) 4 inch, (2) 8 inch, (3) 12 inch: ");
-        /*System.out.println("1) 4 inch");
-        System.out.println("2) 8 inch");
-        System.out.println("3) 12 inch");*/
         int sizeChoice = scanner.nextInt();
-        //scanner.nextLine();
-        int actualSize = switch (sizeChoice){
-            case 1 -> 4;
-            case 2 -> 8;
-            case 3 -> 12;
-            default -> 8;
-        };
-        // put in a helper method to convert from 123 to 4812
+        int actualSize;
+        switch (sizeChoice) {
+            case 1:
+                actualSize = 4;
+                break;
+            case 2:
+                actualSize = 8;
+                break;
+            case 3:
+                actualSize = 12;
+                break;
+            default:
+                System.out.println("Invalid choice. Defaulting to 8 inch sandwich.");
+                actualSize = 8;
+        }
         sandwich.setSize(actualSize);
         scanner.nextLine();
-        System.out.print("White, Wheat, Rye, Wrap\nWhat type of bread would you like?: ");
-        String breadType = scanner.nextLine();
+        /*System.out.print("1) White\n2) Wheat\n3) Rye\n4) Wrap\nWhat type of bread would you like?: ");
+        int breadChoice = scanner.nextInt();
+        String breadType;
+        switch (breadChoice) {
+            case 1:
+                breadType = "White";
+                break;
+            case 2:
+                breadType = "Wheat";
+                break;
+            case 3:
+                breadType = "Rye";
+                break;
+            case 4:
+                breadType = "Wrap";
+                break;
+            default:
+                System.out.println("Invalid choice. Defaulting to White bread for our illiterate user");
+                breadType = "White";
+        }*/
+        //breadTypeConversion(breadChoice);
+        String breadType = breadTypeConversion();
         sandwich.setBreadType(breadType);
         System.out.println("What meat would you like on your sandwich?\n Steak, Ham, Salami, Roast Beef, Chicken, Bacon");
         // prints out the meat options
@@ -192,7 +215,6 @@ public class OrderMenuManager {
         sandwich.setToasted(toastedChoice);
         return sandwich;
 
-
     }
 
     public void plusDrink(){
@@ -212,7 +234,6 @@ public class OrderMenuManager {
         String chipFlavor = scanner.nextLine();
         Chips chips = new Chips(chipFlavor);
         currentOrder.addChip(chips);
-
     }
 
     public void checkout(){
@@ -247,4 +268,22 @@ public class OrderMenuManager {
         String changeCheck = scanner.nextLine();
     }
 
+    public String breadTypeConversion(){
+        System.out.print("1) White\n2) Wheat\n3) Rye\n4) Wrap\nWhat type of bread would you like?: ");
+        int breadChoice = scanner.nextInt();
+        String breadType;
+        switch (breadChoice) {
+            case 1:
+                return "White";
+            case 2:
+                return "Wheat";
+            case 3:
+                return "Rye";
+            case 4:
+                return "Wrap";
+            default:
+                System.out.println("Invalid choice. Defaulting to White bread for our illiterate user");
+                return "White";
+        }
+    }
 }

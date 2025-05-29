@@ -38,7 +38,7 @@ public class OrderMenuManager {
                     break;
                 case 4:
                     System.out.println("Have a nice day");
-                    quit = false;
+                    quit = true;
                     break;
                 default:
                     System.out.println("Invalid choice pick again");
@@ -106,6 +106,7 @@ public class OrderMenuManager {
                 case "5":
                     cancelOrder();
                     running = false;
+                    break;
                 default:
                     System.out.println("Invalid input");
                     break;
@@ -219,12 +220,8 @@ public class OrderMenuManager {
             System.out.println("You haven't added any items to your order yet");
             return;
         }
-        /*Order order = new Order();
-        Sandwich s = plusSandwich();
-        order.addSandwich(s);*/
         currentOrder.getOrderDetails();
 
-        //scanner.nextLine();// print out order details
         System.out.println("Does your order look correct?(yes/no)");
         String orderCheck = scanner.nextLine();
         if (orderCheck.equalsIgnoreCase("yes")){

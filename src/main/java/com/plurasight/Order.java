@@ -49,11 +49,12 @@ public class Order {
     public void getOrderDetails(){
     LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
-    System.out.println("Order placed on: " + now.format(formatter));
-
+        System.out.println();
+        System.out.println("Order placed on: " + now.format(formatter));
+        System.out.println();
 
         double total = 0.00;
-        System.out.println("Sandwiches: ");
+        System.out.println("\nSandwiches: ");
         int i = 1;
         for (Sandwich s : sandwiches){
             double price = s.calculatePrice();
@@ -72,7 +73,7 @@ public class Order {
             System.out.println(" " + c);
             total += c.getPrice();
         }
-        System.out.printf("Total Price: $%.2f\n", total);
+        System.out.printf("\nTotal Price: $%.2f\n", total);
 
     }
 

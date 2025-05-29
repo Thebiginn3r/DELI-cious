@@ -24,6 +24,7 @@ public class OrderMenuManager {
 
             System.out.print("Option choice: ");
             int choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice){
                 case 1:
@@ -77,12 +78,14 @@ public class OrderMenuManager {
         currentOrder = new Order();
         boolean running = true;
         while (running) {
+            System.out.println();
             System.out.println("1 - Add sandwich");
             System.out.println("2 - Add drink");
             System.out.println("3 - Add chips");
             System.out.println("4 - Checkout");
             System.out.println("5 - Cancel Order");
-            scanner.nextLine();
+            System.out.print("Option choice: ");
+            //scanner.nextLine();
 
             String input = scanner.nextLine().trim();
 
@@ -179,13 +182,9 @@ public class OrderMenuManager {
         for (int i = 0; i <  sideNumber; i++) {
             System.out.print("Pick your sauce: ");
             String sideChoice = scanner.nextLine();
-            sandwich.setSide(sideChoice);
+            sandwich.addside(sideChoice);
         }
 
-        System.out.println("What would you like as a side?");
-        String inputS = scanner.nextLine().trim().toLowerCase();
-        String sideChoice = inputS.equals("yes");
-        sandwich.setSide(sideChoice);
         System.out.println("Would you like the sandwich toasted?(yes/no)");
         String toastedChoice = scanner.nextLine();
         sandwich.setToasted(toastedChoice);
@@ -197,9 +196,12 @@ public class OrderMenuManager {
     public void plusDrink(){
         System.out.println("What size drink would you like? 1) Small, 2) Medium, 3) Large");
         int drinkSize = scanner.nextInt();
-        System.out.println("What flavor would you like? ");
+        scanner.nextLine();
+        System.out.println("What flavor would you like?\nSprite, Ice Tea, Orange Soda, Coke, Milk");
+        System.out.print("Flavor choice: ");
         String drinkFlavor = scanner.nextLine();
         Drink drink = new Drink(drinkSize, drinkFlavor);
+        currentOrder.addDrink(drink);
     }
 
     public void plusChips(){

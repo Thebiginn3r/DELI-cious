@@ -26,12 +26,12 @@ public class Sandwich {
         this.sides = sides;
     }
 
-    public String side() {
+    public List<String> getSides() {
         return sides;
     }
 
-    public void setSide(String side) {
-        this.sides = side;
+    public void setSides(List<String> sides) {
+        this.sides = sides;
     }
 
     public boolean getExtraMeat() {
@@ -105,7 +105,7 @@ public class Sandwich {
     }
 
     public void addside(String side){
-        sides.
+        sides.add(side);
     }
 
     public double calculatePrice(){

@@ -20,6 +20,8 @@ public class Drink {
         return flavor;
     }
 
+
+
     public double getPrice(){
         switch (size){
             case 1:
@@ -35,7 +37,13 @@ public class Drink {
 
     @Override
     public String toString() {
-        return size + " " + flavor + " - $" + getPrice();
+        String saySize = switch (size) {
+            case 1 -> "Small";
+            case 2 -> "Medium";
+            case 3 -> "Large";
+            default -> "Unknown Size";
+        };
+        return saySize + " " + flavor + " - $" + String.format("%.2f", getPrice());
     }
 
     /* public ArrayList getSize() {

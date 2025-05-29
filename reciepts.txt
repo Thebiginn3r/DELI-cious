@@ -19,3 +19,13 @@ Chips:
 Total Price: $10.80
 --------------------------------------------------
 
+Order placed on: 2025-05-29|13:25:00
+Sandwiches:
+ Sandwich 1 - $8.60
+Drinks:
+ Medium Sprite - $2.50
+Chips:
+ Chips bbq - $1.50
+Total Price: $12.60
+--------------------------------------------------
+

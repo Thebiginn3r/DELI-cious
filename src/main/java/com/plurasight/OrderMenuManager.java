@@ -173,24 +173,20 @@ public class OrderMenuManager {
         List<Toppings> sauces = saucesConversion();
         sandwich.setToppings(sauces);
 
-
-        System.out.println("Sides: Au Jus, Sauce\nHow many sides would you like?");
-        int sideNumber = scanner.nextInt();
-        scanner.nextLine();
-        for (int i = 0; i <  sideNumber; i++) {
-            System.out.print("Pick your sauce: ");
-            String sideChoice = scanner.nextLine();
-            sandwich.addside(sideChoice);
+        List<String> sides = sideConversion();
+        for (String side : sides) {
+            sandwich.addside(side);
         }
 
+        System.out.println();
         System.out.println("Would you like the sandwich toasted?(yes/no)");
         String toastedChoice = scanner.nextLine();
         sandwich.setToasted(toastedChoice);
         return sandwich;
-
     }
 
     public void plusDrink(){
+        System.out.println();
         System.out.println("What size drink would you like? 1) Small, 2) Medium, 3) Large");
         int drinkSize = scanner.nextInt();
         scanner.nextLine();
@@ -202,6 +198,7 @@ public class OrderMenuManager {
     }
 
     public void plusChips(){
+        System.out.println();
         System.out.println("What flavor chips would you like?\nBBQ, Ranch, Classic, Salt and Vinegar, Sour Cream and onion");
         System.out.print("Flavor choice: ");
         String chipFlavor = scanner.nextLine();
@@ -337,7 +334,7 @@ public class OrderMenuManager {
     }
 
     public List<Toppings> saucesConversion() {
-        List<Toppings> toppings = new ArrayList<>(); // Assuming 'Toppings' is a base class or interface for Sauces
+        List<Toppings> toppings = new ArrayList<>();
 
         String[] sauceOptions = {
                 "Mayo", "Mustard", "Null", "Ketchup", "Ranch",
@@ -346,31 +343,65 @@ public class OrderMenuManager {
 
         System.out.println("Available Sauces:");
         for (int i = 0; i < sauceOptions.length; i++) {
-            if (!sauceOptions[i].equals("Null")) { // Skip "Null" if it's a placeholder for an unused index
+            if (!sauceOptions[i].equals("Null")) {
                 System.out.println((i + 1) + ") " + sauceOptions[i]);
             }
         }
 
         System.out.print("How many sauces would you like: ");
         int sauceNumber = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        scanner.nextLine();
 
         for (int i = 0; i < sauceNumber; i++) {
             System.out.print("Pick your sauce (1-" + sauceOptions.length + "): ");
             int sauceChoice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine();
 
             if (sauceChoice >= 1 && sauceChoice <= sauceOptions.length) {
                 String sauceName = sauceOptions[sauceChoice - 1];
-                // Assuming 'Sauces' is a subclass of 'Toppings' or compatible type
                 toppings.add(new Sauces(sauceName));
             } else {
                 System.out.println("Invalid choice. Adding default sauce: Ketchup.");
-                toppings.add(new Sauces("Ketchup")); // Default sauce if invalid input
+                toppings.add(new Sauces("Ketchup"));
             }
         }
 
         return toppings;
     }
+
+    public List<String> sideConversion() {
+        List<String> selectedSides = new ArrayList<>();
+
+        System.out.println("Sides Available:");
+        System.out.println("1) Au Jus");
+        System.out.println("2) Sauce");
+        System.out.print("How many sides would you like? ");
+        int sideNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        if (sideNumber == 2) {
+            selectedSides.add("Au Jus");
+            selectedSides.add("Sauce");
+        } else if (sideNumber == 1) {
+            System.out.print("Pick a side (1 for Au Jus, 2 for Sauce): ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (choice == 1) {
+                selectedSides.add("Au Jus");
+            } else if (choice == 2) {
+                selectedSides.add("Sauce");
+            } else {
+                System.out.println("Invalid input. Defaulting to Sauce.");
+                selectedSides.add("Sauce");
+            }
+        } else {
+            System.out.println("Invalid input. No sides added.");
+        }
+
+        return selectedSides;
+    }
+
+
 
 }

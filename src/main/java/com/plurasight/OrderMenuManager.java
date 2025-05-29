@@ -140,42 +140,22 @@ public class OrderMenuManager {
         }
         sandwich.setSize(actualSize);
         scanner.nextLine();
-        /*System.out.print("1) White\n2) Wheat\n3) Rye\n4) Wrap\nWhat type of bread would you like?: ");
-        int breadChoice = scanner.nextInt();
-        String breadType;
-        switch (breadChoice) {
-            case 1:
-                breadType = "White";
-                break;
-            case 2:
-                breadType = "Wheat";
-                break;
-            case 3:
-                breadType = "Rye";
-                break;
-            case 4:
-                breadType = "Wrap";
-                break;
-            default:
-                System.out.println("Invalid choice. Defaulting to White bread for our illiterate user");
-                breadType = "White";
-        }*/
-        //breadTypeConversion(breadChoice);
+
         String breadType = breadTypeConversion();
         sandwich.setBreadType(breadType);
-        System.out.println("What meat would you like on your sandwich?\n Steak, Ham, Salami, Roast Beef, Chicken, Bacon");
-        // prints out the meat options
-        String meatOption = scanner.nextLine();
-        sandwich.setMeat(meatOption);
+
+        String meatType = meatTypeConversion();
+        sandwich.setMeat(meatType);
+        scanner.nextLine();
 
         System.out.println("Would you like extra meat?(yes/no)");
         String inputM = scanner.nextLine().trim().toLowerCase();
         boolean extraMChoice = inputM.equals("yes");
         sandwich.setExtraMeat(extraMChoice);
 
-        System.out.println("What cheese would you like?\n American, Provolone, Cheddar, Swiss");
-        String cheeseOption = scanner.nextLine();
-        sandwich.setCheese(cheeseOption);
+        String cheeseType = cheeseTypeConversion();
+        sandwich.setCheese(cheeseType);
+        scanner.nextLine();
 
         System.out.println("Would you like extra cheese?(yes/no)");
         String inputC = scanner.nextLine().trim().toLowerCase();
@@ -284,6 +264,48 @@ public class OrderMenuManager {
             default:
                 System.out.println("Invalid choice. Defaulting to White bread for our illiterate user");
                 return "White";
+        }
+    }
+
+    public String meatTypeConversion(){
+        System.out.print("\n1) Steak\n2) Ham\n3) Salami\n4) Roast Beef\n5) Buffalo Chicken\n6) Bacon\nWhat meat would you like on your sandwich: ");
+        int meatChoice = scanner.nextInt();
+        String breadType;
+        switch (meatChoice) {
+            case 1:
+                return "Steak";
+            case 2:
+                return "Ham";
+            case 3:
+                return "Salami";
+            case 4:
+                return "Roast Beef";
+            case 5:
+                return "Buffalo Chicken";
+            case 6:
+                return "Bacon";
+            default:
+                System.out.println("Invalid choice. Defaulting to Ham for someone who doesn't listen");
+                return "Ham";
+        }
+    }
+
+    public String cheeseTypeConversion(){
+        System.out.println("1) American\n2) Provolone\n3) Cheddar\n4) Swiss\nWhat cheese would you like: ");
+        int cheeseChoice = scanner.nextInt();
+        String cheeseType;
+        switch (cheeseChoice) {
+            case 1:
+                return "American";
+            case 2:
+                return "Provolone";
+            case 3:
+                return "Cheddar";
+            case 4:
+                return "Swiss";
+            default:
+                System.out.println("Invalid choice. Defaulting to Cheddar for our pet peeve of a customer");
+                return "Cheddar";
         }
     }
 }

@@ -121,7 +121,8 @@ public class OrderMenuManager {
 
     public Sandwich plusSandwich(){
         Sandwich sandwich = new Sandwich();
-        System.out.println("What size sandwich would you like? (1) 4 inch, (2) 8 inch, (3) 12 inch: ");
+        System.out.println();
+        System.out.println("1) 4 inch\n2) 8 inch\n3) 12 inch\nWhat size sandwich would you like: ");
         int sizeChoice = scanner.nextInt();
         int actualSize;
         switch (sizeChoice) {
@@ -135,7 +136,7 @@ public class OrderMenuManager {
                 actualSize = 12;
                 break;
             default:
-                System.out.println("Invalid choice. Defaulting to 8 inch sandwich.");
+                System.out.print("Invalid choice. Defaulting to 8 inch sandwich.");
                 actualSize = 8;
         }
         sandwich.setSize(actualSize);
@@ -148,38 +149,30 @@ public class OrderMenuManager {
         sandwich.setMeat(meatType);
         scanner.nextLine();
 
-        System.out.println("Would you like extra meat?(yes/no)");
+        System.out.println();
+        System.out.print("Would you like extra meat(yes/no): ");
         String inputM = scanner.nextLine().trim().toLowerCase();
         boolean extraMChoice = inputM.equals("yes");
         sandwich.setExtraMeat(extraMChoice);
+        System.out.println();
 
         String cheeseType = cheeseTypeConversion();
         sandwich.setCheese(cheeseType);
         scanner.nextLine();
 
-        System.out.println("Would you like extra cheese?(yes/no)");
+        System.out.println();
+        System.out.print("Would you like extra cheese(yes/no): ");
         String inputC = scanner.nextLine().trim().toLowerCase();
         boolean extraCChoice = inputC.equals("yes");
         sandwich.setExtraCheese(extraCChoice);
+        System.out.println();
 
-        List<Toppings> toppings = new ArrayList<>();
-        System.out.println("How many topping would you like?\n Lettuce, Peppers, Onions, Tomatoes, Jalapenos, Cucumbers, Pickles, Guacamole, Mushrooms");
-        int toppingNumber = scanner.nextInt();
-        scanner.nextLine();
-        for (int i = 0; i < toppingNumber; i++) {
-            System.out.print("Pick your topping: ");
-            String toppingChoices = scanner.nextLine();
-            toppings.add(new RegularTopping(toppingChoices));
-        }
-        System.out.println("How many sauces would you like?\n Mayo, Mustard, Ketchup, Ranch, Thousand Island, Vinaigrette");
-        int sauceNumber = scanner.nextInt();
-        scanner.nextLine();
-        for (int i = 0; i <  sauceNumber; i++) {
-            System.out.print("Pick your sauce: ");
-            String sauceChoices = scanner.nextLine();
-            toppings.add(new Sauces(sauceChoices));
-        }
+        List<Toppings> toppings = toppingsConversion();
         sandwich.setToppings(toppings);
+
+        List<Toppings> sauces = saucesConversion();
+        sandwich.setToppings(sauces);
+
 
         System.out.println("Sides: Au Jus, Sauce\nHow many sides would you like?");
         int sideNumber = scanner.nextInt();
@@ -249,7 +242,7 @@ public class OrderMenuManager {
     }
 
     public String breadTypeConversion(){
-        System.out.print("1) White\n2) Wheat\n3) Rye\n4) Wrap\nWhat type of bread would you like?: ");
+        System.out.print("\n1) White\n2) Wheat\n3) Rye\n4) Wrap\nWhat type of bread would you like?: ");
         int breadChoice = scanner.nextInt();
         String breadType;
         switch (breadChoice) {
@@ -308,4 +301,76 @@ public class OrderMenuManager {
                 return "Cheddar";
         }
     }
+
+    public List<Toppings> toppingsConversion() {
+        List<Toppings> toppings = new ArrayList<>();
+
+        String[] toppingOptions = {
+                "Lettuce", "Peppers", "Onions", "Tomatoes", "Jalapenos",
+                "Cucumbers", "Pickles", "Guacamole", "Mushrooms"
+        };
+
+        System.out.println("Available Toppings:");
+        for (int i = 0; i < toppingOptions.length; i++) {
+            System.out.println((i + 1) + ") " + toppingOptions[i]);
+        }
+
+        System.out.print("How many toppings would you like: ");
+        int toppingNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        for (int i = 0; i < toppingNumber; i++) {
+            System.out.print("Pick your topping (1–9): ");
+            int toppingChoice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (toppingChoice >= 1 && toppingChoice <= toppingOptions.length) {
+                String toppingName = toppingOptions[toppingChoice - 1];
+                toppings.add(new RegularTopping(toppingName));
+            } else {
+                System.out.println("Invalid choice. Adding default topping: Jalapenos.");
+                toppings.add(new RegularTopping("Jalapenos"));
+            }
+        }
+
+        return toppings;
+    }
+
+    public List<Toppings> saucesConversion() {
+        List<Toppings> toppings = new ArrayList<>(); // Assuming 'Toppings' is a base class or interface for Sauces
+
+        String[] sauceOptions = {
+                "Mayo", "Mustard", "Null", "Ketchup", "Ranch",
+                "Thousand Island", "Vinaigrette"
+        };
+
+        System.out.println("Available Sauces:");
+        for (int i = 0; i < sauceOptions.length; i++) {
+            if (!sauceOptions[i].equals("Null")) { // Skip "Null" if it's a placeholder for an unused index
+                System.out.println((i + 1) + ") " + sauceOptions[i]);
+            }
+        }
+
+        System.out.print("How many sauces would you like: ");
+        int sauceNumber = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        for (int i = 0; i < sauceNumber; i++) {
+            System.out.print("Pick your sauce (1-" + sauceOptions.length + "): ");
+            int sauceChoice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            if (sauceChoice >= 1 && sauceChoice <= sauceOptions.length) {
+                String sauceName = sauceOptions[sauceChoice - 1];
+                // Assuming 'Sauces' is a subclass of 'Toppings' or compatible type
+                toppings.add(new Sauces(sauceName));
+            } else {
+                System.out.println("Invalid choice. Adding default sauce: Ketchup.");
+                toppings.add(new Sauces("Ketchup")); // Default sauce if invalid input
+            }
+        }
+
+        return toppings;
+    }
+
 }

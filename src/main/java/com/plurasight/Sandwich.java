@@ -1,5 +1,6 @@
 package com.plurasight;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sandwich {
@@ -10,7 +11,7 @@ public class Sandwich {
     private String cheese;
     private boolean extraCheese;
     private boolean extraMeat;
-    private String side;
+    private List<String> sides = new ArrayList<>();
     private List<Toppings> toppings;
 
     public Sandwich() {
@@ -22,15 +23,15 @@ public class Sandwich {
         this.toppings = toppings;
         this.meat = meat;
         this.cheese = cheese;
-        this.side = side;
+        this.sides = sides;
     }
 
-    public String getSide() {
-        return side;
+    public String side() {
+        return sides;
     }
 
     public void setSide(String side) {
-        this.side = side;
+        this.sides = side;
     }
 
     public boolean getExtraMeat() {
@@ -101,6 +102,10 @@ public class Sandwich {
 
     public void getToppings(){
 
+    }
+
+    public void addside(String side){
+        sides.
     }
 
     public double calculatePrice(){

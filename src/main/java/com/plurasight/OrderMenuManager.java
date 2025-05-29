@@ -8,17 +8,19 @@ public class OrderMenuManager {
     Scanner scanner = new Scanner(System.in);
     private Order currentOrder;
     //List flavor = drink.getFlavor();
+    boolean quit = false;
 
 
 
     public void display(){
-        boolean quit = false;
+
         while(!quit){
             System.out.println("Welcome to your favorite Deli shop. Pick an option to continue");
             System.out.println("1 - Start Order");
             System.out.println("2 - See Receipt");//preview of receipt
             System.out.println("3 - See Prices");
             System.out.println("4 - Exit");
+
 
             System.out.print("Option choice: ");
             int choice = scanner.nextInt();
@@ -86,7 +88,8 @@ public class OrderMenuManager {
 
             switch (input) {
                 case "1":
-                    plusSandwich();
+                    Sandwich newSandwich = plusSandwich();
+                    currentOrder.addSandwich(newSandwich);
                     break;
                 case "2":
                     plusDrink();
@@ -111,16 +114,23 @@ public class OrderMenuManager {
 
     }
 
-    public void plusSandwich(){
+    public Sandwich plusSandwich(){
         Sandwich sandwich = new Sandwich();
         //add for loop for number of sandwiches later
-        System.out.print("What size sandwich would you like? (1) 4 inch, (2) 8 inch, (3) 12 inch: ");
-        System.out.println("1) 4 inch");
+        System.out.println("What size sandwich would you like? (1) 4 inch, (2) 8 inch, (3) 12 inch: ");
+        /*System.out.println("1) 4 inch");
         System.out.println("2) 8 inch");
-        System.out.println("3) 12 inch");
+        System.out.println("3) 12 inch");*/
         int sizeChoice = scanner.nextInt();
+        //scanner.nextLine();
+        int actualSize = switch (sizeChoice){
+            case 1 -> 4;
+            case 2 -> 8;
+            case 3 -> 12;
+            default -> 8;
+        };
         // put in a helper method to convert from 123 to 4812
-        sandwich.setSize(sizeChoice);
+        sandwich.setSize(actualSize);
         scanner.nextLine();
         System.out.print("White, Wheat, Rye, Wrap\nWhat type of bread would you like?: ");
         String breadType = scanner.nextLine();
@@ -163,13 +173,23 @@ public class OrderMenuManager {
         }
         sandwich.setToppings(toppings);
 
-        System.out.println("Sides: Au Jus, Sauce");//print sides
-        System.out.println("Would you like a side?(yes/no)");
-        String sideChoice = scanner.nextLine();
+        System.out.println("Sides: Au Jus, Sauce\nHow many sides would you like?");
+        int sideNumber = scanner.nextInt();
+        scanner.nextLine();
+        for (int i = 0; i <  sideNumber; i++) {
+            System.out.print("Pick your sauce: ");
+            String sideChoice = scanner.nextLine();
+            sandwich.setSide(sideChoice);
+        }
+
+        System.out.println("What would you like as a side?");
+        String inputS = scanner.nextLine().trim().toLowerCase();
+        String sideChoice = inputS.equals("yes");
         sandwich.setSide(sideChoice);
         System.out.println("Would you like the sandwich toasted?(yes/no)");
         String toastedChoice = scanner.nextLine();
         sandwich.setToasted(toastedChoice);
+        return sandwich;
 
 
     }
@@ -189,27 +209,35 @@ public class OrderMenuManager {
     }
 
     public void checkout(){
-        Order order = new Order();
+        if (currentOrder == null){
+            System.out.println("You haven't added any items to your order yet");
+            return;
+        }
+        /*Order order = new Order();
+        Sandwich s = plusSandwich();
+        order.addSandwich(s);*/
+        currentOrder.getOrderDetails();
+
+        //scanner.nextLine();// print out order details
         System.out.println("Does your order look correct?(yes/no)");
-        System.out.println(order);// print out order details
         String orderCheck = scanner.nextLine();
         if (orderCheck.equalsIgnoreCase("yes")){
             //write to receipt file
-            return;
-        } if (orderCheck.equalsIgnoreCase("no")) {
+            System.out.println("Thanx your order has been placed");
+        } else if (orderCheck.equalsIgnoreCase("no")) {
             editOrder();
         } else {
-            System.out.println("Invalid choice. Try again.");
-            return;
+            System.out.println("Invalid choice. Returning to menu");
         }
-
-
     }
 
     public void cancelOrder(){
 
     }
 
-    public void editOrder(){}
+    public void editOrder(){
+        System.out.println("What would you like to change?");
+        String changeCheck = scanner.nextLine();
+    }
 
 }

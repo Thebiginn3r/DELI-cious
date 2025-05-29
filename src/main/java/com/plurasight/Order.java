@@ -1,6 +1,7 @@
 package com.plurasight;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,31 +47,33 @@ public class Order {
     }
 
     public void getOrderDetails(){
+    LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
+    System.out.println("Order placed on: " + now.format(formatter));
 
-        System.out.println("Order placed on: " + LocalDateTime.now());
-        System.out.println();
 
         double total = 0.00;
         System.out.println("Sandwiches: ");
         int i = 1;
         for (Sandwich s : sandwiches){
             double price = s.calculatePrice();
-            System.out.printf(" Sandwich %d - $%.2f", i++, price);
+            System.out.printf("Sandwich %d - $%.2f", i++, price);
             total += price;
         }
 
-        System.out.println("Drinks:");
+        System.out.println("\nDrinks:");
         for (Drink d : drinks){
             System.out.println(" " + d);
             total += d.getPrice();
         }
 
-        System.out.println("Chips:");
+        System.out.println("\nChips:");
         for (Chips c : chips){
             System.out.println(" " + c);
             total += c.getPrice();
         }
         System.out.printf("Total Price: $%.2f", total);
+
     }
 
     public void getTotalPrice(){

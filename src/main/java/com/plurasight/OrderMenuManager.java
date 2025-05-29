@@ -179,7 +179,7 @@ public class OrderMenuManager {
         }
 
         System.out.println();
-        System.out.println("Would you like the sandwich toasted?(yes/no)");
+        System.out.print("Would you like the sandwich toasted(yes/no): ");
         String toastedChoice = scanner.nextLine();
         sandwich.setToasted(toastedChoice);
         return sandwich;
@@ -187,21 +187,16 @@ public class OrderMenuManager {
 
     public void plusDrink(){
         System.out.println();
-        System.out.println("What size drink would you like? 1) Small, 2) Medium, 3) Large");
+        System.out.println("1) Small\n2) Medium\n3) Large\nWhat size drink would you like? ");
         int drinkSize = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("What flavor would you like?\nSprite, Ice Tea, Orange Soda, Coke, Milk");
-        System.out.print("Flavor choice: ");
-        String drinkFlavor = scanner.nextLine();
+        String drinkFlavor = drinkFlavorConversion();
         Drink drink = new Drink(drinkSize, drinkFlavor);
         currentOrder.addDrink(drink);
     }
 
     public void plusChips(){
-        System.out.println();
-        System.out.println("What flavor chips would you like?\nBBQ, Ranch, Classic, Salt and Vinegar, Sour Cream and onion");
-        System.out.print("Flavor choice: ");
-        String chipFlavor = scanner.nextLine();
+       String chipFlavor = chipFlavorConversion();
         Chips chips = new Chips(chipFlavor);
         currentOrder.addChip(chips);
     }
@@ -216,11 +211,11 @@ public class OrderMenuManager {
         System.out.println("Does your order look correct?(yes/no)");
         String orderCheck = scanner.nextLine();
         if (orderCheck.equalsIgnoreCase("yes")){
-            //write to receipt file
+
             System.out.println("Thanx your order has been placed");
-        } else if (orderCheck.equalsIgnoreCase("no")) {
-            editOrder();
-        } else {
+        } /*else if (orderCheck.equalsIgnoreCase("no")) {
+            editOrder();*/
+        else {
             System.out.println("Invalid choice. Returning to menu");
         }
 
@@ -231,12 +226,10 @@ public class OrderMenuManager {
     public void cancelOrder(){
 
     }
-
-
-    public void editOrder(){
+    /*public void editOrder(){
         System.out.println("What would you like to change?");
         String changeCheck = scanner.nextLine();
-    }
+    }*/
 
     public String breadTypeConversion(){
         System.out.print("\n1) White\n2) Wheat\n3) Rye\n4) Wrap\nWhat type of bread would you like?: ");
@@ -402,6 +395,38 @@ public class OrderMenuManager {
         return selectedSides;
     }
 
+    public String drinkFlavorConversion(){
+        System.out.println();
+        String[] flavors = {"Sprite", "Ice Tea","Orange Soda", "Coke", "Water"};
+        System.out.println("1) Sprite\n2) Ice Tea\n3) Orange Soda\n4) Coke\n5) Water\nWhat flavor would you like?");
+        System.out.print("Flavor choice (1-5): ");
+        int flavorChoice = scanner.nextInt();
+        scanner.nextLine();
 
+        String drinkFlavor;
+        if(flavorChoice >= 1 && flavorChoice <= flavors.length){
+            drinkFlavor = flavors[flavorChoice - 1];
+        } else {
+            System.out.println("Invalid choice. Your just getting a Sprite pal");
+            drinkFlavor = "Sprite";
+        }
+        return drinkFlavor;
+    }
 
+    public String chipFlavorConversion (){
+        System.out.println();
+        String[] flavors = {"BBQ", "Ranch","Classic", "Salt and Vinegar", "Sour Cream and Onion"};
+        System.out.println("1) BBQ\n2) Ranch\n3) Classic\n4) Salt and Vinegar\n5) Sour Cream and Onion\nWhat flavor would you like?");
+        System.out.print("Flavor choice (1-5): ");
+        int flavorChoice = scanner.nextInt();
+        scanner.nextLine();
+        String chipFlavor;
+        if(flavorChoice >= 1 && flavorChoice <= flavors.length){
+            chipFlavor = flavors[flavorChoice - 1];
+        } else {
+            System.out.println("Invalid choice. You just getting BBQ kid");
+            chipFlavor = "BBQ";
+        }
+        return chipFlavor;
+    }
 }

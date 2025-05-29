@@ -99,6 +99,7 @@ public class OrderMenuManager {
                     break;
                 case "3":
                     plusChips();
+                    break;
                 case "4":
                     checkout();
                     break;
@@ -205,8 +206,11 @@ public class OrderMenuManager {
     }
 
     public void plusChips(){
-        System.out.println("What flavor chips would you like?");
+        System.out.println("What flavor chips would you like?\nBBQ, Ranch, Classic, Salt and Vinegar, Sour Cream and onion");
+        System.out.print("Flavor choice: ");
         String chipFlavor = scanner.nextLine();
+        Chips chips = new Chips(chipFlavor);
+        currentOrder.addChip(chips);
 
     }
 

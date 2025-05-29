@@ -3,20 +3,20 @@ package com.plurasight;
 import java.util.List;
 
 public class Chips {
-    private List flavor;
+    private String flavor;
 
-    public Chips(List flavor) {
-        flavor = flavor;
+    public Chips(String flavor) {
+        this.flavor = flavor;
     }
 
-    public List getFlavor() {
+    /*public String getFlavor() {
         flavor.add("BBQ");
         flavor.add("Ranch");
         flavor.add("Classic");
         flavor.add("Salt & Vinegar");
         flavor.add("Sour Cream & Onion");
-        return flavor;
-    }
+        return;
+    }*/
 
     public double getPrice(){
         return 1.50;
@@ -24,8 +24,6 @@ public class Chips {
 
     @Override
     public String toString() {
-        return "Chips{" +
-                "flavor=" + flavor +
-                '}';
+        return "Chips " + flavor + " - $" + String.format("%.2f", getPrice());
     }
 }

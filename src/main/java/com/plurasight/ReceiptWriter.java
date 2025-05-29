@@ -1,5 +1,6 @@
 package com.plurasight;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReceiptWriter {
-    private static final String File_Name = "reciepts.txt";
+    private static final String Receipt_Folder = "receipts";
     private final Order order;
 
     public ReceiptWriter(Order order) {
@@ -15,9 +16,19 @@ public class ReceiptWriter {
     }
 
     public void saveOrder(){
-        try (PrintWriter pw = new PrintWriter(new FileWriter(File_Name, true))) {
+        DateTimeFormatter fileformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+        String fileName = "receipt_" + order.getDateTime().format(fileformatter) + ".txt";
+
+        File folder = new File(Receipt_Folder);
+        if (!folder.exists()){
+            folder.mkdir();
+        }
+
+        File recieptFile = new File(folder,fileName);
+
+        try (PrintWriter pw = new PrintWriter(new FileWriter(recieptFile))) {
             pw.write(getOrderDetailsAsString());
-            System.out.println("Order saved successfully to " + File_Name);
+            System.out.println("Order saved successfully to " + recieptFile.getPath());
         } catch (IOException e) {
             System.out.println("Failed to write receipt: " + e.getMessage());
             e.printStackTrace();

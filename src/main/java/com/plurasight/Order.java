@@ -51,17 +51,16 @@ public class Order {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
         System.out.println();
         System.out.println("Order placed on: " + now.format(formatter));
-        System.out.println();
 
         double total = 0.00;
-        System.out.println("\nSandwiches: ");
+        System.out.println("\nSandwiches:");
         int i = 1;
         for (Sandwich s : sandwiches){
             double price = s.calculatePrice();
             System.out.printf("Sandwich %d - $%.2f", i++, price);
             total += price;
         }
-
+        //System.out.println();
         System.out.println("\nDrinks:");
         for (Drink d : drinks){
             System.out.println(" " + d);

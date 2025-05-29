@@ -17,9 +17,8 @@ public class OrderMenuManager {
         while(!quit){
             System.out.println("Welcome to your favorite Deli shop. Pick an option to continue");
             System.out.println("1 - Start Order");
-            System.out.println("2 - See Receipt");//preview of receipt
-            System.out.println("3 - See Prices");
-            System.out.println("4 - Exit");
+            System.out.println("2 - See Prices");
+            System.out.println("3 - Exit");
 
 
             System.out.print("Option choice: ");
@@ -31,12 +30,9 @@ public class OrderMenuManager {
                     startOrder();
                     break;
                 case 2:
-                    seeReceipt();
-                    break;
-                case 3:
                     seePrices();
                     break;
-                case 4:
+                case 3:
                     System.out.println("Have a nice day");
                     quit = true;
                     break;
@@ -70,8 +66,6 @@ public class OrderMenuManager {
         System.out.println("               ----------------------------------------");
         System.out.printf("%-15s %-12s%n", "All Chips", "$1.50");
 
-        //System.out.println(flavor);
-
     }
 
     public void startOrder() {
@@ -85,7 +79,6 @@ public class OrderMenuManager {
             System.out.println("4 - Checkout");
             System.out.println("5 - Cancel Order");
             System.out.print("Option choice: ");
-            //scanner.nextLine();
 
             String input = scanner.nextLine().trim();
 
@@ -101,11 +94,16 @@ public class OrderMenuManager {
                     plusChips();
                     break;
                 case "4":
-                    checkout();
+                    boolean isFinished = checkout();
+                    if (isFinished){
+                        running = false;
+                    }
                     break;
                 case "5":
-                    cancelOrder();
-                    running = false;
+                    boolean isGone = cancelOrder();
+                    if (isGone) {
+                        running = false;
+                    }
                     break;
                 default:
                     System.out.println("Invalid input");
@@ -115,7 +113,7 @@ public class OrderMenuManager {
         }
     }
 
-    public void seeReceipt(){
+    public void previewOrder(){
 
     }
 
@@ -201,29 +199,45 @@ public class OrderMenuManager {
         currentOrder.addChip(chips);
     }
 
-    public void checkout(){
-        if (currentOrder == null){
-            System.out.println("You haven't added any items to your order yet");
-            return;
-        }
+    public boolean checkout(){
         currentOrder.getOrderDetails();
 
         System.out.println("Does your order look correct?(yes/no)");
-        String orderCheck = scanner.nextLine();
-        if (orderCheck.equalsIgnoreCase("yes")){
+        String orderCheck = scanner.nextLine().trim().toLowerCase();
 
+        if (orderCheck.equalsIgnoreCase("yes")){
+            ReceiptWriter rw = new ReceiptWriter(currentOrder);
+            rw.saveOrder();
             System.out.println("Thanx your order has been placed");
-        } /*else if (orderCheck.equalsIgnoreCase("no")) {
-            editOrder();*/
-        else {
-            System.out.println("Invalid choice. Returning to menu");
+            return true;
+        } else if (orderCheck.equals("no")){
+            System.out.println("You can keep adding to your order");
+            return false;
+        } else {
+            System.out.println("Invalid input returning to main menu");
+            return false;
         }
 
-        ReceiptWriter rw = new ReceiptWriter(currentOrder);
-        rw.saveOrder();
+        /*ReceiptWriter rw = new ReceiptWriter(currentOrder);
+        rw.saveOrder();*/
+
     }
 
-    public void cancelOrder(){
+    public boolean cancelOrder(){
+        System.out.println("Are you sure you want to cancel your order(yes/no): ");
+        String cancelChoice = scanner.nextLine();
+
+        if (cancelChoice.equalsIgnoreCase("yes")){
+            currentOrder = null;
+            System.out.println("Your current order has been deleted");
+            return true;
+        } else if (cancelChoice.equals("no")){
+            System.out.println("Returning you back to the menu");
+            return false;
+        } else {
+            System.out.println("Since your unsure or just can't spell I'll send you back to the menu.");
+            return false;
+        }
 
     }
     /*public void editOrder(){

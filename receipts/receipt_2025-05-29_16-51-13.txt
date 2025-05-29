@@ -1,0 +1,8 @@
+Order placed on: 2025-05-29|16:52:08
+Sandwiches:
+Drinks:
+ Medium Coke - $2.50
+Chips:
+Total Price: $2.50
+--------------------------------------------------
+

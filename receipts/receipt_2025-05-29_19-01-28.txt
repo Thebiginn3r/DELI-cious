@@ -1,0 +1,8 @@
+Order placed on: 2025-05-29|19:01:40
+Sandwiches:
+Drinks:
+Chips:
+ Chips BBQ - $1.50
+Total Price: $1.50
+--------------------------------------------------
+

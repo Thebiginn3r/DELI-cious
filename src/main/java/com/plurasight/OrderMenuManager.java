@@ -1,5 +1,7 @@
 package com.plurasight;
 
+//mport jdk.internal.icu.impl.NormalizerImpl;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -76,8 +78,9 @@ public class OrderMenuManager {
             System.out.println("1 - Add sandwich");
             System.out.println("2 - Add drink");
             System.out.println("3 - Add chips");
-            System.out.println("4 - Checkout");
-            System.out.println("5 - Cancel Order");
+            System.out.println("4 - Preview Order");
+            System.out.println("5 - Checkout");
+            System.out.println("6 - Cancel Order");
             System.out.print("Option choice: ");
 
             String input = scanner.nextLine().trim();
@@ -94,12 +97,15 @@ public class OrderMenuManager {
                     plusChips();
                     break;
                 case "4":
+                    previewOrder();
+                    break;
+                case "5":
                     boolean isFinished = checkout();
                     if (isFinished){
                         running = false;
                     }
                     break;
-                case "5":
+                case "6":
                     boolean isGone = cancelOrder();
                     if (isGone) {
                         running = false;
@@ -114,6 +120,11 @@ public class OrderMenuManager {
     }
 
     public void previewOrder(){
+        if (currentOrder == null){
+            System.out.println("Nothing in the order");
+            return;
+        }
+        currentOrder.getOrderDetails();
 
     }
 
@@ -224,6 +235,12 @@ public class OrderMenuManager {
     }
 
     public boolean cancelOrder(){
+        if (currentOrder == null ||(currentOrder.getSandwiches().isEmpty() && currentOrder.getDrinks().isEmpty() && currentOrder.getChips().isEmpty())){
+            System.out.println("\nThere is no order yet");
+            System.out.println("Returning to the menu...");
+            return false;
+        }
+        currentOrder.getOrderDetails();
         System.out.println("Are you sure you want to cancel your order(yes/no): ");
         String cancelChoice = scanner.nextLine();
 
@@ -267,7 +284,7 @@ public class OrderMenuManager {
     public String meatTypeConversion(){
         System.out.print("\n1) Steak\n2) Ham\n3) Salami\n4) Roast Beef\n5) Buffalo Chicken\n6) Bacon\nWhat meat would you like on your sandwich: ");
         int meatChoice = scanner.nextInt();
-        String breadType;
+        String meatType;
         switch (meatChoice) {
             case 1:
                 return "Steak";
@@ -290,7 +307,7 @@ public class OrderMenuManager {
     public String cheeseTypeConversion(){
         System.out.println("1) American\n2) Provolone\n3) Cheddar\n4) Swiss\nWhat cheese would you like: ");
         int cheeseChoice = scanner.nextInt();
-        String cheeseType;
+
         switch (cheeseChoice) {
             case 1:
                 return "American";

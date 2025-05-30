@@ -36,6 +36,7 @@ public class ReceiptWriter {
     }
 
     private String getOrderDetailsAsString(){
+
         StringBuilder sb = new StringBuilder();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
         sb.append("Order placed on: ").append(LocalDateTime.now().format(formatter)).append("\n");

@@ -1,0 +1,9 @@
+Order placed on: 2025-05-30|01:37:21
+Sandwiches:
+ Sandwich 1 - $5.50
+Drinks:
+ Medium Sprite - $2.50
+Chips:
+Total Price: $8.00
+--------------------------------------------------
+

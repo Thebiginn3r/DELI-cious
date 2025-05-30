@@ -47,6 +47,10 @@ public class Order {
     }
 
     public void getOrderDetails(){
+        if (sandwiches.isEmpty() && drinks.isEmpty() && chips.isEmpty()){
+            System.out.println("\nThere is no order yet");
+            return;
+        }
     LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
         System.out.println();
